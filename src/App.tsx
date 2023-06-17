@@ -1,11 +1,12 @@
 import "./App.css";
-import Input from "./components/input/Input";
+import FormPage from "./pages/FormPage";
+// import MainPage from "./pages/MainPage";
 
 function App() {
-
   return (
     <>
-      <Input />
+      {/* <MainPage /> */}
+      <FormPage/>
     </>
   );
 }

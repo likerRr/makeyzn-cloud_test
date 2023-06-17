@@ -1,14 +1,4 @@
-h3 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
 
-a {
-    font-size: 12px;
-    text-decoration: none;
-    color: #5558FA;
-}
 
 .container {
     margin: 1.8em;
@@ -34,7 +24,7 @@ a {
     margin-right: 24px;
 }
 
-.main__contacts-links {
+.main__contacts_links {
     display: flex;
     list-style-type: none;
     gap: 18px;
@@ -54,6 +44,7 @@ a {
     height: 44px;
     margin-bottom: 24px;
     padding: 12px;
+    margin-top: 8px;
 
 }
 
