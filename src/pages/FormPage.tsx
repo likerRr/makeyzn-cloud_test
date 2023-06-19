@@ -7,14 +7,25 @@ import Step3 from "../components/Step3";
 
 const FormPage = () => {
   const [page, setPage] = useState(1);
+  const [formData, setFormData] = useState({
+    nickname: "",
+    name: "",
+    sername: "",
+    sex: "",
+    advantages: "",
+    checkbox: "",
+    radio: "",
+    textarea: "",
+  })
+
 
   const PageDisplay = () => {
     if (page === 1) {
-      return <Step1 />;
+      return <Step1 formData={formData} setFormData={setFormData}/>;
     } else if (page === 2) {
-      return <Step2 />;
+      return <Step2/>;
     } else {
-      return <Step3 />;
+      return <Step3 formData={formData} setFormData={setFormData}/>;
     }
   };
 
@@ -37,14 +48,18 @@ const FormPage = () => {
             Назад
           </button>
           <button
-            disabled={page == 3}
             id="button-next"
             className={button.buttonNext}
+            type="submit"
             onClick={() => {
-              setPage((currPage) => currPage + 1);
+              if (page === 3) {
+                console.log(formData)
+              } else {
+                setPage((currPage) => currPage + 1);
+              }
             }}
           >
-            Далее
+            {page === 3 ? "Отправить" : "Далее"}
           </button>
         </div>
       </div>

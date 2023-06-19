@@ -6,24 +6,13 @@ import button from "../modules/Button.module.css";
 import style from "../modules/FormPage.module.css"
 import * as yup from "yup";
 
-const Step1 = () => {
+const Step1 = ({formData, setFormData}) => {
   const schema = yup.object().shape({
-    nickname: yup
+    about: yup
       .string()
-      .max(30)
+      .max(200)
       .matches(/^[a-zA-Z0-9]+$/, "Only letters and numbers are allowed")
       .required(),
-    name: yup
-      .string()
-      .max(50)
-      .matches(/^[a-zA-Z]+$/, "Only alphabetic characters are allowed")
-      .required(),
-    sername: yup
-      .string()
-      .max(50)
-      .matches(/^[a-zA-Z]+$/, "Only alphabetic characters are allowed")
-      .required(),
-    sex: yup.string().oneOf(["man", "woman"]).required(),
   });
 
   const {
@@ -44,8 +33,8 @@ const Step1 = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={form.container}>
             <p>Textarea</p>
-            <textarea style={{border: '1px solid #000'}} name="" id="" cols="100" rows="10"></textarea>
-            <p>{errors.nickname?.message}</p>
+            <textarea className={form.textarea} id="field-about" {...register("about")} placeholder="Placeholder" rows="4"></textarea>
+            <p>{errors.about?.message}</p>
           </div>
         </form>
       </div>

@@ -6,7 +6,7 @@ import button from "../modules/Button.module.css";
 import style from "../modules/FormPage.module.css"
 import * as yup from "yup";
 
-const Step1 = () => {
+const Step1 = ({formData, setFormData}) => {
   const schema = yup.object().shape({
     nickname: yup
       .string()
@@ -48,6 +48,8 @@ const Step1 = () => {
               type="text"
               placeholder="Placeholder"
               {...register("nickname")}
+              value={formData.nickname}
+              onChange={(e) => setFormData({...formData, nickname: e.target.value})}
               className={form.input}
             />
             <p>{errors.nickname?.message}</p>
@@ -56,6 +58,8 @@ const Step1 = () => {
               type="text"
               placeholder="Placeholder"
               {...register("name")}
+              value={formData.name}
+              onChange={(e) => setFormData({...formData, name: e.target.value})}
               className={form.input}
             />
             <p>{errors.name?.message}</p>
@@ -64,12 +68,19 @@ const Step1 = () => {
               type="text"
               placeholder="Placeholder"
               {...register("sername")}
+              value={formData.sername}
+              onChange={(e) => setFormData({...formData, sername: e.target.value})}
               className={form.input}
             />
             <p>{errors.sername?.message}</p>
             <p>Sex</p>
             {/* Стилизовать option */}
-            <select {...register("sex")} className={form.input}>
+            <select 
+              {...register("sex")} 
+              className={form.input}
+              value={formData.sex}
+              onChange={(e) => setFormData({...formData, sex: e.target.value})}
+            >
               <option value="" disabled selected hidden>
                 Не выбрано
               </option>
@@ -82,7 +93,6 @@ const Step1 = () => {
             </select>
             <p>{errors.sex?.message}</p>
           </div>
-          <input type="submit" />
         </form>
       </div>
     </>
