@@ -1,12 +1,25 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import form from "../modules/form.module.css";
 import button from "../modules/Button.module.css";
-import style from "../modules/FormPage.module.css"
+import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { addInfo } from "../features/Advantages/Data-slice";
 
-const Step1 = ({formData, setFormData}) => {
+export type InfoValues = {
+  nickname: string;
+  name: string;
+  surname: string;
+  sex: string;
+};
+
+const Step1 = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const data = useSelector((state) => state.data);
   const schema = yup.object().shape({
     nickname: yup
       .string()
@@ -18,7 +31,7 @@ const Step1 = ({formData, setFormData}) => {
       .max(50)
       .matches(/^[a-zA-Z]+$/, "Only alphabetic characters are allowed")
       .required(),
-    sername: yup
+    surname: yup
       .string()
       .max(50)
       .matches(/^[a-zA-Z]+$/, "Only alphabetic characters are allowed")
@@ -32,10 +45,16 @@ const Step1 = ({formData, setFormData}) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: data,
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  function goBack() {
+    navigate("/");
+  }
+
+  const onSubmit = (data: InfoValues) => {
+    dispatch(addInfo(data));
+    navigate("/create/step2");
   };
 
   return (
@@ -48,8 +67,6 @@ const Step1 = ({formData, setFormData}) => {
               type="text"
               placeholder="Placeholder"
               {...register("nickname")}
-              value={formData.nickname}
-              onChange={(e) => setFormData({...formData, nickname: e.target.value})}
               className={form.input}
             />
             <p>{errors.nickname?.message}</p>
@@ -58,8 +75,6 @@ const Step1 = ({formData, setFormData}) => {
               type="text"
               placeholder="Placeholder"
               {...register("name")}
-              value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
               className={form.input}
             />
             <p>{errors.name?.message}</p>
@@ -67,20 +82,13 @@ const Step1 = ({formData, setFormData}) => {
             <input
               type="text"
               placeholder="Placeholder"
-              {...register("sername")}
-              value={formData.sername}
-              onChange={(e) => setFormData({...formData, sername: e.target.value})}
+              {...register("surname")}
               className={form.input}
             />
-            <p>{errors.sername?.message}</p>
+            <p>{errors.surname?.message}</p>
             <p>Sex</p>
             {/* Стилизовать option */}
-            <select 
-              {...register("sex")} 
-              className={form.input}
-              value={formData.sex}
-              onChange={(e) => setFormData({...formData, sex: e.target.value})}
-            >
+            <select {...register("sex")} className={form.input}>
               <option value="" disabled selected hidden>
                 Не выбрано
               </option>
@@ -92,6 +100,22 @@ const Step1 = ({formData, setFormData}) => {
               </option>
             </select>
             <p>{errors.sex?.message}</p>
+          </div>
+          <div className="footer">
+            <button
+              id="button-back"
+              className={button.buttonBack}
+              onClick={goBack}
+            >
+              Назад
+            </button>
+            <button
+              id="button-next"
+              className={button.buttonNext}
+              type="submit"
+            >
+              Далее
+            </button>
           </div>
         </form>
       </div>

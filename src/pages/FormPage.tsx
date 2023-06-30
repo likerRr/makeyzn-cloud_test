@@ -7,26 +7,20 @@ import Step3 from "../components/Step3";
 
 const FormPage = () => {
   const [page, setPage] = useState(1);
-  const [formData, setFormData] = useState({
-    nickname: "",
-    name: "",
-    sername: "",
-    sex: "",
-    advantages: "",
-    checkbox: "",
-    radio: "",
-    textarea: "",
-  })
 
 
   const PageDisplay = () => {
     if (page === 1) {
-      return <Step1 formData={formData} setFormData={setFormData}/>;
+      return <Step1/>;
     } else if (page === 2) {
       return <Step2/>;
     } else {
-      return <Step3 formData={formData} setFormData={setFormData}/>;
+      return <Step3/>;
     }
+  };
+
+  const onSubmit = (data: any) => {
+    console.log(data);
   };
 
   return (
@@ -53,7 +47,7 @@ const FormPage = () => {
             type="submit"
             onClick={() => {
               if (page === 3) {
-                console.log(formData)
+                console.log()
               } else {
                 setPage((currPage) => currPage + 1);
               }
