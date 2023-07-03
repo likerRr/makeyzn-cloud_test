@@ -8,6 +8,7 @@ import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { addInfo } from "../features/Advantages/Data-slice";
+import CustomizedSteppers from "./Stepper";
 
 export type InfoValues = {
   nickname: string;
@@ -60,6 +61,7 @@ const Step1 = () => {
   return (
     <>
       <div className={style.container}>
+        <CustomizedSteppers activeStep={0} />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={form.container}>
             <p>Nickname</p>

@@ -8,6 +8,7 @@ import form from "../modules/form.module.css";
 import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
 import button from "../modules/Button.module.css";
+import CustomizedSteppers from "./Stepper";
 
 export type FormValues = {
   advntgs: {
@@ -68,6 +69,7 @@ const Step1 = () => {
   return (
     <>
       <div className={style.container}>
+        <CustomizedSteppers activeStep={1}/>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={form.inputAdv}>
             <p>Advantages</p>

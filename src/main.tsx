@@ -5,12 +5,14 @@ import ReactDOM from 'react-dom/client'
 import './normalize.css'
 import './index.css'
 import App from './App.tsx'
+import Stepper from './components/Stepper.tsx';
 import { store } from './store.ts'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
     <BrowserRouter>
       <App />
+      {/* <Stepper /> */}
     </BrowserRouter>
   </Provider>,
 )

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import form from "../modules/form.module.css";
@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { addAbout } from "../features/Advantages/Data-slice";
+import CustomizedSteppers from "./Stepper";
 
 export type AboutValues = {
   about: string;
@@ -17,6 +18,8 @@ const Step1 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.data);
+
+  const [symbols, setSymbols] = useState("");
 
   const schema = yup.object().shape({
     about: yup
@@ -43,9 +46,15 @@ const Step1 = () => {
     dispatch(addAbout(data));
   };
 
+  function symbolCounter(e: any) {
+    const newSymbols = e.target.value;
+    setSymbols(newSymbols);
+  }
+
   return (
     <>
       <div className={style.container}>
+        <CustomizedSteppers activeStep={2}/>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={form.container}>
             <p>Textarea</p>
@@ -55,7 +64,9 @@ const Step1 = () => {
               {...register("about")}
               placeholder="Placeholder"
               rows="4"
+              onChange={symbolCounter}
             ></textarea>
+            <p>{symbols.length}</p>
             <p>{errors.about?.message}</p>
           </div>
           <div className="footer">
