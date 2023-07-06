@@ -170,7 +170,7 @@ const Step1 = () => {
             </div>
             <p>{errors.radio?.message}</p>
           </div>
-          <div className="footer">
+          <div className={button.container}>
             <button
               id="button-back"
               className={button.buttonBack}

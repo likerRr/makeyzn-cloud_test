@@ -103,7 +103,7 @@ const Step1 = () => {
             </select>
             <p>{errors.sex?.message}</p>
           </div>
-          <div className="footer">
+          <div className={button.container}>
             <button
               id="button-back"
               className={button.buttonBack}

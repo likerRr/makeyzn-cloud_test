@@ -20,3 +20,8 @@
     background: url(../images/trash.svg);
     background-repeat: no-repeat;
 }
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}

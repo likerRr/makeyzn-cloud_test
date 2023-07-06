@@ -7,7 +7,7 @@ import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { addAbout } from "../features/Advantages/Data-slice";
+import { addAbout, sendData } from "../features/Advantages/Data-slice";
 import CustomizedSteppers from "./Stepper";
 
 export type AboutValues = {
@@ -69,7 +69,7 @@ const Step1 = () => {
             <p>{symbols.length}</p>
             <p>{errors.about?.message}</p>
           </div>
-          <div className="footer">
+          <div className={button.container}>
             <button
               id="button-back"
               className={button.buttonBack}
@@ -81,6 +81,7 @@ const Step1 = () => {
               id="button-next"
               className={button.buttonNext}
               type="submit"
+              onClick={() => dispatch(sendData())}
             >
               Отправить
             </button>
