@@ -51,6 +51,7 @@ const initialState = {
   radio: "",
   about: "",
   status: "",
+  isOpen: false,
 } as any;
 
 const dataSlice = createSlice({
@@ -75,19 +76,24 @@ const dataSlice = createSlice({
     addAbout: (state, action: PayloadAction<AboutValues>) => {
       state.about = action.payload.about;
     },
+    closeModal: (state, action) => {
+      state.isOpen = false;
+    },
   },
   extraReducers: {
     [sendData.fulfilled]: (state, action) => {
       console.log("Отправлено!");
       state.status = "fulfilled";
+      state.isOpen = true;
     },
     [sendData.rejected]: (state, action) => {
       console.log("rejected!");
       state.status = "rejected";
+      state.isOpen = true;
     },
   },
 });
 
-export const { addData, addMain, addInfo, addAbout } = dataSlice.actions;
+export const { addData, addMain, addInfo, addAbout, closeModal } = dataSlice.actions;
 
 export const dataReducer = dataSlice.reducer;

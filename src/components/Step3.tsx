@@ -7,8 +7,17 @@ import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { addAbout, sendData } from "../features/Advantages/Data-slice";
+import {
+  addAbout,
+  closeModal,
+  sendData,
+} from "../features/Advantages/Data-slice";
 import CustomizedSteppers from "./Stepper";
+import Modal from "../UI/Button/Modal/Modal";
+import modal from "../modules/Modal.module.css";
+import cancel from "../images/circle-xmark-solid.svg";
+import AcceptIcon from "../UI/AcceptIcon";
+import CancelIcon from "../UI/CancelIcon";
 
 export type AboutValues = {
   about: string;
@@ -18,6 +27,7 @@ const Step1 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.data);
+  const status = useSelector((state) => state.data.status);
 
   const [symbols, setSymbols] = useState("");
 
@@ -42,6 +52,10 @@ const Step1 = () => {
     navigate("/create/step2");
   }
 
+  function goMain() {
+    navigate("/");
+  }
+
   const onSubmit = (data: AboutValues) => {
     dispatch(addAbout(data));
   };
@@ -51,10 +65,14 @@ const Step1 = () => {
     setSymbols(newSymbols);
   }
 
+  function closeModalClickHandler() {
+    dispatch(closeModal());
+  }
+
   return (
     <>
       <div className={style.container}>
-        <CustomizedSteppers activeStep={2}/>
+        <CustomizedSteppers activeStep={2} />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={form.container}>
             <p>Textarea</p>
@@ -87,6 +105,39 @@ const Step1 = () => {
             </button>
           </div>
         </form>
+        {status === "fulfilled" && (
+          <Modal
+            renderHeader={() => <p>Форма успешно отправлена</p>}
+            renderMainContent={() => AcceptIcon()}
+            renderFooter={() => (
+              <button className={button.buttonNext} onClick={goMain}>
+                На главную
+              </button>
+            )}
+          />
+        )}
+        {status === "rejected" && (
+          <Modal
+            renderHeader={() => (
+              <div className={modal.headerContainer}>
+                <p>Ошибка</p>
+                <button
+                  onClick={closeModalClickHandler}
+                  className={modal.close}
+                ></button>
+              </div>
+            )}
+            renderMainContent={() => CancelIcon()}
+            renderFooter={() => (
+              <button
+                onClick={closeModalClickHandler}
+                className={button.buttonNext}
+              >
+                Закрыть
+              </button>
+            )}
+          />
+        )}
       </div>
     </>
   );
