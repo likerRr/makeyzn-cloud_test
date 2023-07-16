@@ -7,8 +7,8 @@ import button from "../modules/Button.module.css";
 import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { addInfo } from "../features/Advantages/Data-slice";
-import CustomizedSteppers from "./Stepper";
+import { addInfo } from "../features/Data-slice";
+import CustomizedSteppers from "../components/Stepper";
 
 export type InfoValues = {
   nickname: string;

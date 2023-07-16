@@ -1,10 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { dataReducer } from "./features/Advantages/Data-slice";
-
+import { dataReducer } from "./features/Data-slice";
 
 export const store = configureStore({
-    reducer: {
-        data: dataReducer,
-    },
-    devTools: true,
+  reducer: {
+    data: dataReducer,
+  },
+  devTools: true,
 });

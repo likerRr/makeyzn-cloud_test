@@ -7,17 +7,13 @@ import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import {
-  addAbout,
-  closeModal,
-  sendData,
-} from "../features/Advantages/Data-slice";
-import CustomizedSteppers from "./Stepper";
-import Modal from "../UI/Button/Modal/Modal";
+import { addAbout, closeModal, sendData } from "../features/Data-slice";
+import CustomizedSteppers from "../components/Stepper";
+import Modal from "../components/UI/Modal/Modal";
 import modal from "../modules/Modal.module.css";
 import cancel from "../images/circle-xmark-solid.svg";
-import AcceptIcon from "../UI/AcceptIcon";
-import CancelIcon from "../UI/CancelIcon";
+import AcceptIcon from "../components/UI/Icons/AcceptIcon";
+import CancelIcon from "../components/UI/Icons/CancelIcon";
 
 export type AboutValues = {
   about: string;

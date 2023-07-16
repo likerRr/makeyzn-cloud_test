@@ -1,6 +1,6 @@
 import React from 'react'
-import accept from "../images/circle-check-solid.svg";
-import icon from "../modules/Modal.module.css";
+import accept from "../../../images/circle-check-solid.svg";
+import icon from "../../../modules/Modal.module.css";
 
 const AcceptIcon = () => {
   return (

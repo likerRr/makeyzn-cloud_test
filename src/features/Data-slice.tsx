@@ -1,8 +1,8 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { InfoValues } from "../../components/Step1";
-import { FormValues } from "../../components/Step2";
-import { MainValues } from "../../pages/MainPage";
-import { AboutValues } from "../../components/Step3";
+import { InfoValues } from "../pages/Step1";
+import { FormValues } from "../pages/Step2";
+import { MainValues } from "../pages/MainPage";
+import { AboutValues } from "../pages/Step3";
 
 export const sendData = createAsyncThunk(
   "data/sendData",
@@ -26,14 +26,14 @@ export const sendData = createAsyncThunk(
             checkboxes: getState().data.checkboxes,
             radio: Number(getState().data.radio),
             about: getState().data.about,
-          }), // отредактировать типы данных 
+          }), // отредактировать типы данных
         }
       );
       if (!response.ok) {
         throw new Error("Can't send data to server");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return rejectWithValue(error.message);
     }
   }
@@ -94,6 +94,7 @@ const dataSlice = createSlice({
   },
 });
 
-export const { addData, addMain, addInfo, addAbout, closeModal } = dataSlice.actions;
+export const { addData, addMain, addInfo, addAbout, closeModal } =
+  dataSlice.actions;
 
 export const dataReducer = dataSlice.reducer;

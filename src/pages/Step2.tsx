@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { addData } from "../features/Advantages/Data-slice";
+import { addData } from "../features/Data-slice";
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import form from "../modules/form.module.css";
 import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
 import button from "../modules/Button.module.css";
-import CustomizedSteppers from "./Stepper";
+import CustomizedSteppers from "../components/Stepper";
 
 export type FormValues = {
   advntgs: {
@@ -69,7 +69,7 @@ const Step1 = () => {
   return (
     <>
       <div className={style.container}>
-        <CustomizedSteppers activeStep={1}/>
+        <CustomizedSteppers activeStep={1} />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={form.inputAdv}>
             <p>Advantages</p>
