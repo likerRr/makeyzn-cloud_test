@@ -1,4 +1,3 @@
-import React from 'react'
 import accept from "../../../images/circle-check-solid.svg";
 import icon from "../../../modules/Modal.module.css";
 

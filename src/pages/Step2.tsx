@@ -1,6 +1,4 @@
-import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
 import { addData } from "../features/Data-slice";
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,34 +7,29 @@ import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
 import button from "../modules/Button.module.css";
 import CustomizedSteppers from "../components/Stepper";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
-export type FormValues = {
-  advntgs: {
-    advntg: string;
-  }[];
-  checkboxes: string[];
-  radio: string;
-};
+const schema = yup.object().shape({
+  advntgs: yup
+    .array(
+      yup.object().shape({
+        advntg: yup.string().required("Введите данные в форму"),
+      })
+    )
+    .required(),
+  checkboxes: yup
+    .array()
+    .of(yup.string())
+    .min(1, "Выберите хотя бы один элемент"),
+  radio: yup.string().required("Выберите один элемент"),
+});
+
+export type FormValues = yup.InferType<typeof schema>
 
 const Step1 = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const data = useSelector((state) => state.data);
-
-  const schema = yup.object().shape({
-    advntgs: yup
-      .array(
-        yup.object().shape({
-          advntg: yup.string().required("Введите данные в форму"),
-        })
-      )
-      .required(),
-    checkboxes: yup
-      .array()
-      .of(yup.string())
-      .min(1, "Выберите хотя бы один элемент"),
-    radio: yup.string().required("Выберите один элемент"),
-  });
+  const data = useAppSelector((state) => state.data);
 
   const {
     register,

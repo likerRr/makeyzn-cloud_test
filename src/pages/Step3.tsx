@@ -5,25 +5,24 @@ import form from "../modules/form.module.css";
 import button from "../modules/Button.module.css";
 import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { addAbout, closeModal, sendData } from "../features/Data-slice";
+import { RootState, addAbout, closeModal, sendData } from "../features/Data-slice";
 import CustomizedSteppers from "../components/Stepper";
 import Modal from "../components/UI/Modal/Modal";
 import modal from "../modules/Modal.module.css";
-import cancel from "../images/circle-xmark-solid.svg";
 import AcceptIcon from "../components/UI/Icons/AcceptIcon";
 import CancelIcon from "../components/UI/Icons/CancelIcon";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
 export type AboutValues = {
   about: string;
 };
 
 const Step1 = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const data = useSelector((state) => state.data);
-  const status = useSelector((state) => state.data.status);
+  const data = useAppSelector((state) => state.data);
+  const status = useAppSelector((state) => state.data.status);
 
   const [symbols, setSymbols] = useState("");
 
@@ -77,7 +76,7 @@ const Step1 = () => {
               id="field-about"
               {...register("about")}
               placeholder="Placeholder"
-              rows="4"
+              rows={4}
               onChange={symbolCounter}
             ></textarea>
             <p>{symbols.length}</p>

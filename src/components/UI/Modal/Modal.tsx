@@ -12,8 +12,7 @@ export default function Modal({
   renderHeader,
   renderFooter,
   renderMainContent,
-  renderClose,
-}) {
+}: any) {
   const portal = document.getElementById("portal");
   const isOpen = useSelector((state) => state.data.isOpen);
   console.log(isOpen);

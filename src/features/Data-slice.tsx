@@ -3,10 +3,26 @@ import { InfoValues } from "../pages/Step1";
 import { FormValues } from "../pages/Step2";
 import { MainValues } from "../pages/MainPage";
 import { AboutValues } from "../pages/Step3";
+import { store } from "../store";
+
+interface DataState {
+  phone: string;
+  email: string;
+  nickname: string;
+  name: string;
+  surname: string;
+  sex: string;
+  advntgs: { advntg: string }[];
+  checkboxes: string[];
+  radio: string;
+  about: string;
+  status: string;
+  isOpen: boolean;
+}
 
 export const sendData = createAsyncThunk(
   "data/sendData",
-  async function (_, { rejectWithValue, dispatch, getState }) {
+  async function (_, { rejectWithValue, getState }) {
     try {
       const response = await fetch(
         "https://api.sbercloud.ru/content/v1/bootcamp/frontend",
@@ -39,7 +55,7 @@ export const sendData = createAsyncThunk(
   }
 );
 
-const initialState = {
+const initialState: DataState = {
   phone: "",
   email: "",
   nickname: "",
@@ -52,7 +68,7 @@ const initialState = {
   about: "",
   status: "",
   isOpen: false,
-} as any;
+};
 
 const dataSlice = createSlice({
   name: "data",
@@ -76,21 +92,21 @@ const dataSlice = createSlice({
     addAbout: (state, action: PayloadAction<AboutValues>) => {
       state.about = action.payload.about;
     },
-    closeModal: (state, action) => {
+    closeModal: (state) => {
       state.isOpen = false;
     },
   },
-  extraReducers: {
-    [sendData.fulfilled]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(sendData.fulfilled, (state) => {
       console.log("Отправлено!");
       state.status = "fulfilled";
       state.isOpen = true;
-    },
-    [sendData.rejected]: (state, action) => {
+    });
+    builder.addCase(sendData.rejected, (state) => {
       console.log("rejected!");
       state.status = "rejected";
       state.isOpen = true;
-    },
+    });
   },
 });
 
@@ -98,3 +114,7 @@ export const { addData, addMain, addInfo, addAbout, closeModal } =
   dataSlice.actions;
 
 export const dataReducer = dataSlice.reducer;
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;

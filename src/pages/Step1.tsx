@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,9 +5,9 @@ import form from "../modules/form.module.css";
 import button from "../modules/Button.module.css";
 import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
 import { addInfo } from "../features/Data-slice";
 import CustomizedSteppers from "../components/Stepper";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
 export type InfoValues = {
   nickname: string;
@@ -18,9 +17,9 @@ export type InfoValues = {
 };
 
 const Step1 = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const data = useSelector((state) => state.data);
+  const data = useAppSelector((state) => state.data);
   const schema = yup.object().shape({
     nickname: yup
       .string()
