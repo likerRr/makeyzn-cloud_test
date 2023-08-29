@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import ReactDOM from "react-dom";
-import modal from "../../../modules/Modal.module.css";
+import modal from "../modules/Modal.module.css";
+import { useAppSelector } from "../hooks/hooks";
 
 const root = document.createElement("div");
 root.classList.add("portal");
@@ -14,15 +13,15 @@ export default function Modal({
   renderMainContent,
 }: any) {
   const portal = document.getElementById("portal");
-  const isOpen = useSelector((state) => state.data.isOpen);
+  const isOpen = useAppSelector((state) => state.data.isOpen);
   console.log(isOpen);
   if (!isOpen) return null;
   return ReactDOM.createPortal(
     <>
-    <div className={modal.overlay}></div>
+      <div className={modal.overlay}></div>
       <div className={modal.container}>
         <header className={modal.header}>{renderHeader?.()}</header>
-        <main >{renderMainContent?.()}</main>
+        <main>{renderMainContent?.()}</main>
         <footer className={modal.footer}>{renderFooter?.()}</footer>
       </div>
     </>,

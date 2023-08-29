@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import form from "../modules/form.module.css";
@@ -6,13 +6,13 @@ import button from "../modules/Button.module.css";
 import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
 import { useNavigate } from "react-router";
-import { RootState, addAbout, closeModal, sendData } from "../features/Data-slice";
+import { addAbout } from "../features/SendDataSlice";
 import CustomizedSteppers from "../components/Stepper";
-import Modal from "../components/UI/Modal/Modal";
-import modal from "../modules/Modal.module.css";
-import AcceptIcon from "../components/UI/Icons/AcceptIcon";
-import CancelIcon from "../components/UI/Icons/CancelIcon";
+
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import ModalWindow from "../components/ModalWindow";
+import { Button } from "../components/Button";
+import { sendData } from "../features/SendDataAction";
 
 export type AboutValues = {
   about: string;
@@ -22,7 +22,6 @@ const Step1 = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const data = useAppSelector((state) => state.data);
-  const status = useAppSelector((state) => state.data.status);
 
   const [symbols, setSymbols] = useState("");
 
@@ -47,10 +46,6 @@ const Step1 = () => {
     navigate("/create/step2");
   }
 
-  function goMain() {
-    navigate("/");
-  }
-
   const onSubmit = (data: AboutValues) => {
     dispatch(addAbout(data));
   };
@@ -58,10 +53,6 @@ const Step1 = () => {
   function symbolCounter(e: any) {
     const newSymbols = e.target.value;
     setSymbols(newSymbols);
-  }
-
-  function closeModalClickHandler() {
-    dispatch(closeModal());
   }
 
   return (
@@ -83,56 +74,24 @@ const Step1 = () => {
             <p>{errors.about?.message}</p>
           </div>
           <div className={button.container}>
-            <button
+            <Button
               id="button-back"
               className={button.buttonBack}
               onClick={goBack}
             >
               Назад
-            </button>
-            <button
+            </Button>
+            <Button
               id="button-next"
               className={button.buttonNext}
               type="submit"
               onClick={() => dispatch(sendData())}
             >
               Отправить
-            </button>
+            </Button>
           </div>
         </form>
-        {status === "fulfilled" && (
-          <Modal
-            renderHeader={() => <p>Форма успешно отправлена</p>}
-            renderMainContent={() => AcceptIcon()}
-            renderFooter={() => (
-              <button className={button.buttonNext} onClick={goMain}>
-                На главную
-              </button>
-            )}
-          />
-        )}
-        {status === "rejected" && (
-          <Modal
-            renderHeader={() => (
-              <div className={modal.headerContainer}>
-                <p>Ошибка</p>
-                <button
-                  onClick={closeModalClickHandler}
-                  className={modal.close}
-                ></button>
-              </div>
-            )}
-            renderMainContent={() => CancelIcon()}
-            renderFooter={() => (
-              <button
-                onClick={closeModalClickHandler}
-                className={button.buttonNext}
-              >
-                Закрыть
-              </button>
-            )}
-          />
-        )}
+        <ModalWindow />
       </div>
     </>
   );

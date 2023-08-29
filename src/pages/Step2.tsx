@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { addData } from "../features/Data-slice";
+import { addData } from "../features/SendDataSlice";
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import form from "../modules/form.module.css";
@@ -8,6 +8,7 @@ import * as yup from "yup";
 import button from "../modules/Button.module.css";
 import CustomizedSteppers from "../components/Stepper";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { Button } from "../components/Button";
 
 const schema = yup.object().shape({
   advntgs: yup
@@ -24,7 +25,7 @@ const schema = yup.object().shape({
   radio: yup.string().required("Выберите один элемент"),
 });
 
-export type FormValues = yup.InferType<typeof schema>
+export type FormValues = yup.InferType<typeof schema>;
 
 const Step1 = () => {
   const dispatch = useAppDispatch();
@@ -164,21 +165,21 @@ const Step1 = () => {
             <p>{errors.radio?.message}</p>
           </div>
           <div className={button.container}>
-            <button
+            <Button
               id="button-back"
               className={button.buttonBack}
               type="submit"
               onClick={goBack}
             >
               Назад
-            </button>
-            <button
+            </Button>
+            <Button
               id="button-next"
               className={button.buttonNext}
               type="submit"
             >
               Далее
-            </button>
+            </Button>
           </div>
         </form>
       </div>

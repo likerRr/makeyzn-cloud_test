@@ -5,9 +5,10 @@ import form from "../modules/form.module.css";
 import button from "../modules/Button.module.css";
 import style from "../modules/FormPage.module.css";
 import * as yup from "yup";
-import { addInfo } from "../features/Data-slice";
+import { addInfo } from "../features/SendDataSlice";
 import CustomizedSteppers from "../components/Stepper";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { Button } from "../components/Button";
 
 export type InfoValues = {
   nickname: string;
@@ -103,20 +104,20 @@ const Step1 = () => {
             <p>{errors.sex?.message}</p>
           </div>
           <div className={button.container}>
-            <button
+            <Button
               id="button-back"
               className={button.buttonBack}
               onClick={goBack}
             >
               Назад
-            </button>
-            <button
+            </Button>
+            <Button
               id="button-next"
               className={button.buttonNext}
               type="submit"
             >
               Далее
-            </button>
+            </Button>
           </div>
         </form>
       </div>

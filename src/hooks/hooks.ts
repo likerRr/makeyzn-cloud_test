@@ -1,5 +1,5 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../features/Data-slice";
+import { AppDispatch, RootState } from "../features/SendDataSlice";
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
 
