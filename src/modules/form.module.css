@@ -1,0 +1,44 @@
+.input {
+  background-color: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  width: 400px;
+  height: 44px;
+  margin-bottom: 24px;
+  margin-top: 8px;
+  padding: 12px;
+}
+
+.inputAdv {
+  margin-top: 70px;
+  margin-bottom: 24px;
+}
+
+.inputAdv input {
+  margin-bottom: 8px;
+}
+.container {
+  margin-top: 70px;
+  margin-bottom: 24px;
+}
+
+.checkbox {
+  margin-bottom: 24px;
+}
+
+.checkbox input {
+  height: 16px;
+  width: 16px;
+  margin-right: 10px;
+}
+
+.container p {
+  margin-bottom: 5px;
+}
+
+.textarea {
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  width: 48rem;
+}

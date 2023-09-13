@@ -1,0 +1,67 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.16);
+  z-index: 1000;
+}
+
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 50px;
+  z-index: 1000;
+  padding: 32px;
+  height: 310px;
+  width: 460px;
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 12px;
+}
+
+.header {
+  font-size: 21px;
+  font-weight: 600;
+  width: 100%;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  height: 80px;
+  width: 80px;
+}
+
+.green {
+  background-color: rgb(5, 174, 113, 0.15);
+}
+
+.red {
+  background-color: rgb(232, 78, 88, 0.15);
+}
+
+.mainContent img {
+  height: 40px;
+  z-index: 1001;
+}
+
+.close {
+  height: 28px;
+  width: 28px;
+  background-image: url(../images/circle-xmark-grey.svg);
+}
